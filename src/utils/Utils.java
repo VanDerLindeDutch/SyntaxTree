@@ -8,12 +8,12 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Utils {
-    public static List<String> deleteSpaces(String string){
+    public static List<String> deleteSpaces(String string) {
         char[] chars = string.toCharArray();
         Character[] charactersWithoutSpaces = IntStream.range(0, chars.length)
                 .mapToObj(i -> chars[i])
                 .filter(x -> x != ' ').
-                        toArray(Character[]::new);
+                toArray(Character[]::new);
         StringBuilder buf = new StringBuilder();
         List<String> list = new ArrayList<>();
         for (Character charactersWithoutSpace : charactersWithoutSpaces) {
@@ -27,7 +27,7 @@ public class Utils {
                 list.add(charactersWithoutSpace.toString());
             }
         }
-        if(!buf.isEmpty()){
+        if (!buf.isEmpty()) {
             list.add(buf.toString());
         }
         System.out.println(list);

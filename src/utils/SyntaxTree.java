@@ -44,9 +44,6 @@ public class SyntaxTree {
                 currentNode.leftNode = newNode;
                 currentNode = currentNode.leftNode;
             } else if (OPERATORS.containsKey(value)) {
-                if(currentNode.value!=null){
-                    
-                }
                 currentNode.value = value;
                 newNode.parent = currentNode;
                 currentNode.rightNode = newNode;
@@ -59,10 +56,9 @@ public class SyntaxTree {
                     newParNode.leftNode = currentNode;
                 }
                 currentNode = currentNode.parent;
-            }
-            else{
+            } else {
                 currentNode.value = value;
-                if(currentNode.parent==null){
+                if (currentNode.parent == null) {
                     Node newParNode = new Node();
                     root = newParNode;
                     currentNode.parent = newParNode;
@@ -90,14 +86,11 @@ public class SyntaxTree {
         Node right = node.rightNode;
         if (left != null && right != null) {
             Operator operation = OPERATORS.get(node.value);
-            int res = operation.execute(calculate(left, string), calculate(right, string));
-//            string.append(res);
-            return res;
+            return operation.execute(calculate(left, string), calculate(right, string));
         } else {
             try {
                 return Integer.parseInt(node.value);
-            }
-            catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 string.append(node.value).append(" ").append(node.parent.value).append(" ");
                 return 0;
             }
