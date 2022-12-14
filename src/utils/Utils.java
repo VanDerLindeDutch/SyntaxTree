@@ -30,7 +30,6 @@ public class Utils {
         if(!buf.isEmpty()){
             list.add(buf.toString());
         }
-        System.out.println(list);
         return list;
 
     }

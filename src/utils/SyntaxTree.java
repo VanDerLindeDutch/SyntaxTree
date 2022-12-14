@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.HashMap;
+import java.util.List;
 
 interface Operator {
     int execute(int x, int y);
@@ -44,10 +45,20 @@ public class SyntaxTree {
                 currentNode.leftNode = newNode;
                 currentNode = currentNode.leftNode;
             } else if (OPERATORS.containsKey(value)) {
-                currentNode.value = value;
-                newNode.parent = currentNode;
-                currentNode.rightNode = newNode;
-                currentNode = currentNode.rightNode;
+                if (currentNode.value != null) {
+                    currentNode.rightNode.leftNode = new Node();
+                    currentNode.rightNode.leftNode.value = currentNode.rightNode.value;
+                    currentNode.rightNode.leftNode.parent = currentNode.rightNode;
+                    currentNode.rightNode.rightNode = new Node();
+                    currentNode.rightNode.rightNode.parent = currentNode.rightNode;
+                    currentNode.rightNode.value = value;
+                    currentNode = currentNode.rightNode.rightNode;
+                } else {
+                    currentNode.value = value;
+                    newNode.parent = currentNode;
+                    currentNode.rightNode = newNode;
+                    currentNode = currentNode.rightNode;
+                }
             } else if (value.equals(")")) {
                 if (currentNode.parent == null) {
                     Node newParNode = new Node();
